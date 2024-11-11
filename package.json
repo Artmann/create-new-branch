@@ -1,0 +1,10 @@
+{
+  "name": "create-branch",
+  "version": "1.0.0",
+  "description": "Creates new Git branches.",
+  "main": "dist/index.js",
+  "repository": "https://github.com/artmann/create-branch",
+  "author": "Christoffer Artmann",
+  "license": "MIT",
+  "private": false
+}
