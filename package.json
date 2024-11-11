@@ -1,10 +1,18 @@
 {
-  "name": "create-branch",
+  "name": "create-new-branch",
   "version": "1.0.0",
   "description": "Creates new Git branches.",
   "main": "dist/index.js",
-  "repository": "https://github.com/artmann/create-branch",
+  "repository": "https://github.com/artmann/create-new-branch",
   "author": "Christoffer Artmann",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "type": "module",
+  "dependencies": {
+    "@types/yargs": "^17.0.33",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0"
+  }
 }

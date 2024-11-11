@@ -1,9 +1,8 @@
-# Create branch
+# Create new branch
 
 The easy way to create new Git branches.
 
 ```shell
-npx create-branch "Add new tracking events"
+npx create-new-branch "Add new tracking events"
 
 ```
-
