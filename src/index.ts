@@ -1,6 +1,8 @@
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 
+import { createBranchName } from './branch-names'
+
 interface Args {
   name: string
 }
@@ -24,7 +26,13 @@ async function main() {
 
   const args = (argv as unknown) as Args
 
-  console.log(`Creating new branch: ${args.name}`)
+  if (!args.name || args.name.trim() === '') {
+    throw new Error('Branch name is required.')
+  }
+
+  const branchName = createBranchName(args.name)
+
+  console.log(`Creating new branch: ${branchName}`)
 }
 
 main().catch((err) => {
