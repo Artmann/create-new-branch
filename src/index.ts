@@ -1,9 +1,9 @@
 import ora from 'ora'
+import simpleGit from 'simple-git'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 
 import { createNewBranch } from './create-new-branch'
-import simpleGit from 'simple-git'
 
 interface Args {
   name: string

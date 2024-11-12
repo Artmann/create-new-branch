@@ -1,9 +1,9 @@
-
+import { Ora } from 'ora'
 import { SimpleGit } from 'simple-git'
 
 import { createBranchName } from './branch-names'
 import { findDefaultBranch, hasChanges } from './git'
-import { Ora } from 'ora'
+
 
 export async function createNewBranch(git: SimpleGit, spinner: Ora, name: string): Promise<void> {
   const branchName = createBranchName(name)
@@ -21,6 +21,10 @@ export async function createNewBranch(git: SimpleGit, spinner: Ora, name: string
   spinner.text = 'Checking out the default branch'
 
   await git.checkout(defaultBranchName)
+
+  spinner.text = `Fetching the latest changes from ${defaultBranchName}`
+
+  await git.pull('origin', defaultBranchName)
 
   spinner.text = `Creating branch ${branchName}`
 
