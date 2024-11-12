@@ -18,6 +18,10 @@ export async function createNewBranch(git: SimpleGit, spinner: Ora, name: string
 
   const defaultBranchName = await findDefaultBranch(git)
 
+  spinner.text = 'Checking out the default branch'
+
+  await git.checkout(defaultBranchName)
+
   spinner.text = `Creating branch ${branchName}`
 
   spinner.succeed(`Created branch ${branchName}`)
