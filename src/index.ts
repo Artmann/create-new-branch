@@ -1,10 +1,9 @@
 import ora from 'ora'
-import { simpleGit } from 'simple-git'
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 
-import { createBranchName } from './branch-names'
-import { findDefaultBranch } from './git'
+import { createNewBranch } from './create-new-branch'
+import simpleGit from 'simple-git'
 
 interface Args {
   name: string
@@ -33,20 +32,16 @@ async function main() {
     throw new Error('Branch name is required.')
   }
 
-
+  const git = simpleGit()
   const spinner = ora('Creating branch name').start()
 
-  const branchName = createBranchName(args.name)
+  try {
+    await createNewBranch(git, spinner, args.name)
+  } catch (error: any) {
+    spinner.fail(error.message)
 
-  spinner.text = 'Finding the default branch'
-
-  const git = simpleGit()
-
-  const defaultBranchName = await findDefaultBranch(git)
-
-  spinner.text = `Creating branch ${branchName}`
-
-  spinner.succeed(`Created branch ${branchName}`)
+    process.exit(1)
+  }
 
   process.exit(0)
 }

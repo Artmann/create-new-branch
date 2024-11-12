@@ -17,3 +17,9 @@ export async function findDefaultBranch(git: SimpleGit): Promise<string> {
 
   return match[1]
 }
+
+export async function hasChanges(git: SimpleGit): Promise<boolean> {
+  const status = await git.status()
+
+  return status.files.length > 0
+}
