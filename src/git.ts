@@ -1,5 +1,11 @@
 import { SimpleGit } from 'simple-git'
 
+export async function doesBranchExist(git: SimpleGit, branchName: string): Promise<boolean> {
+  const branches = await git.branch()
+
+  return branches.all.includes(branchName)
+}
+
 export async function findDefaultBranch(git: SimpleGit): Promise<string> {
   const result = await git.raw(['ls-remote', '--symref', 'origin', 'HEAD'])
 

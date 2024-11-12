@@ -1,8 +1,22 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { findDefaultBranch } from './git'
+import { doesBranchExist, findDefaultBranch } from './git'
 
 describe('git', () => {
+  describe('doesBranchExist', () => {
+    it('returns if a branch exists.', async () => {
+      const gitMock = {
+        branch: vi.fn().mockResolvedValue({
+          all: ["main", "remotes/origin/main", 'my-feature'],
+        })
+      }
+
+      expect(await doesBranchExist(gitMock as any, 'my-feature')).toBe(true)
+      expect(await doesBranchExist(gitMock as any, 'main')).toBe(true)
+      expect(await doesBranchExist(gitMock as any, 'another-feature')).toBe(false)
+    })
+  })
+
   describe('findDefaultBranch', () => {
     it('should return the default branch name', async () => {
       const gitMock = {

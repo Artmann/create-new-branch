@@ -2,11 +2,17 @@ import { Ora } from 'ora'
 import { SimpleGit } from 'simple-git'
 
 import { createBranchName } from './branch-names'
-import { findDefaultBranch, hasChanges } from './git'
+import { doesBranchExist, findDefaultBranch, hasChanges } from './git'
 
 
 export async function createNewBranch(git: SimpleGit, spinner: Ora, name: string): Promise<void> {
   const branchName = createBranchName(name)
+
+  const branchExists = await doesBranchExist(git, branchName)
+
+  if (branchExists) {
+    throw Error(`A branch with the name ${branchName} already exists.`)
+  }
 
   const hasUncommittedChanges = await hasChanges(git)
 
